@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
                 $this->cleanDB();
 
                 $this->call(UsersTableSeeder::class);
+                $this->call(CategoriesTableSeeder::class);
+                $this->call(ProductsTableSeeder::class);
 
                 break;
             default:
