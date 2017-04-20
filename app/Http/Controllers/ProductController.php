@@ -30,7 +30,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ProductRequest  $request
      * @return \App\Product
      */
     public function store(ProductRequest $request)
@@ -80,6 +80,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $this->authorize('delete', $product);
+
+        $product->delete();
+        return $product;
     }
 }
