@@ -24,4 +24,5 @@ Route::post('login', 'Auth\ApiLoginController@login')->name('apilogin');
 Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('products', 'ProductController');
     Route::resource('categories', 'CategoryController');
+    Route::get('tags/{tag}/products', 'TagController@products')->name('tag.products');
 });

@@ -18,6 +18,15 @@ class TagController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @param Tag $tag
+     * @return mixed
+     */
+    public function products(Request $request, Tag $tag) {
+        return $tag->products;
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

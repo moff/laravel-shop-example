@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
 use App\Product;
+use App\Tag;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -15,6 +16,15 @@ class ProductController extends Controller
     public function index()
     {
         return Product::paginate();
+    }
+
+    /**
+     * @param Request $request
+     * @param Tag $tag
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function searchByTag(Request $request, Tag $tag) {
+        return $tag->products();
     }
 
     /**
