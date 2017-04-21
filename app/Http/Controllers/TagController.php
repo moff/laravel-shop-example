@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TagRequest;
 use App\Tag;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        return Tag::paginate();
     }
 
     /**
@@ -44,18 +45,18 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Tag::create(request()->all());
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Tag  $tag
-     * @return \Illuminate\Http\Response
+     * @param  \App\Tag $tag
+     * @return Tag
      */
     public function show(Tag $tag)
     {
-        //
+        return $tag;
     }
 
     /**
@@ -72,13 +73,16 @@ class TagController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Tag  $tag
-     * @return \Illuminate\Http\Response
+     * @param TagRequest|Request $request
+     * @param  \App\Tag $tag
+     * @return Tag
      */
-    public function update(Request $request, Tag $tag)
+    public function update(TagRequest $request, Tag $tag)
     {
-        //
+        $this->authorize('update', $tag);
+
+        $tag->update(request()->all());
+        return $tag;
     }
 
     /**
@@ -89,6 +93,9 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $this->authorize('delete', $tag);
+
+        $tag->delete();
+        return $tag;
     }
 }
