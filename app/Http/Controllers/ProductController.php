@@ -63,20 +63,23 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param ProductRequest $request
+     * @param  \App\Product $product
+     * @return Product
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        $this->authorize('update', $product);
+
+        $product->update(request()->all());
+        return $product;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param  \App\Product $product
+     * @return Product
      */
     public function destroy(Product $product)
     {
