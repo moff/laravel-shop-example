@@ -15,6 +15,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'user1',
             'email' => 'user1@shop.app',
+            'login' => 'user1',
             'password' => bcrypt('password'),
             'api_token' => str_random(60)
         ]);
@@ -22,6 +23,7 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'user2',
             'email' => 'user2@shop.app',
+            'login' => 'user2',
             'password' => bcrypt('password'),
             'api_token' => str_random(60)
         ]);

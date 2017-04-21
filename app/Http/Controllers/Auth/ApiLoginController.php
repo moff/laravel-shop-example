@@ -6,6 +6,13 @@ use Illuminate\Support\Facades\Auth;
 
 class ApiLoginController extends LoginController
 {
+    protected $logWith = 'email';
+
+    public function username()
+    {
+        return $this->logWith;
+    }
+
     /**
      * Handle a login request to the application.
      *
@@ -14,6 +21,9 @@ class ApiLoginController extends LoginController
      */
     public function login(Request $request)
     {
+        $this->logWith = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'login';
+        $request->merge([$this->logWith => $request->input('login')]);
+
         $this->validateLogin($request);
 
         // If the class is using the ThrottlesLogins trait, we can automatically throttle
