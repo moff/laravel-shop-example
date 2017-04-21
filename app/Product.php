@@ -15,4 +15,6 @@ class Product extends Model
         'price',
         'category_id',
     ];
+
+    protected $hidden = ['user_id'];
 }
