@@ -1,10 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductFilterRequest;
 use App\Http\Requests\ProductRequest;
 use App\Product;
-use App\Tag;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -16,6 +15,21 @@ class ProductController extends Controller
     public function index()
     {
         return Product::paginate();
+    }
+
+    /**
+     * @param ProductFilterRequest|\Illuminate\Http\Request $request
+     * @return mixed
+     */
+    public function filter(ProductFilterRequest $request) {
+        $products = Product::query();
+
+        if ($request->has('title')) $products->where('title', 'LIKE', '%' . $request->input('title') . '%');
+        if ($request->has('description')) $products->where('description', 'LIKE', '%' . $request->input('description') . '%');
+        if ($request->has('price_min')) $products->where('price', '>=', $request->input('price_min'));
+        if ($request->has('price_max')) $products->where('price', '<=', $request->input('price_max'));
+
+        return $products->get();
     }
 
     /**

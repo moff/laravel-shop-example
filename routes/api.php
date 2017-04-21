@@ -22,6 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login', 'Auth\ApiLoginController@login')->name('apilogin');
 
 Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('products/filter', 'ProductController@filter');
     Route::resource('products', 'ProductController');
     Route::resource('categories', 'CategoryController');
     Route::resource('tags', 'TagController');
