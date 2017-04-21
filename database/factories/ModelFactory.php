@@ -26,3 +26,9 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
         'price' => $faker->randomFloat(2, 5, 1000),
     ];
 });
+
+$factory->define(App\Tag::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->text(20),
+    ];
+});

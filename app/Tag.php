@@ -9,6 +9,8 @@ class Tag extends Model
         'title',
     ];
 
+    public $timestamps = false;
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
