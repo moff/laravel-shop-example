@@ -19,15 +19,6 @@ class ProductController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @param Tag $tag
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function searchByTag(Request $request, Tag $tag) {
-        return $tag->products();
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
