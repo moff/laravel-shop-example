@@ -45,8 +45,6 @@ class ApiLoginController extends LoginController
      */
     protected function sendLoginResponse(Request $request)
     {
-        $request->session()->regenerate();
-
         $this->clearLoginAttempts($request);
 
         // Set new token
@@ -66,5 +64,14 @@ class ApiLoginController extends LoginController
     public function showLoginForm()
     {
         return view('auth.apilogin');
+    }
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
     }
 }

@@ -19,6 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('login', 'Auth\ApiLoginController@login')->name('apilogin');
+
 Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('products', 'ProductController');
 });
