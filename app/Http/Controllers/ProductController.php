@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return Product::paginate();
     }
 
     /**
@@ -41,12 +41,12 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
+     * @param  \App\Product $product
+     * @return Product
      */
     public function show(Product $product)
     {
-        //
+        return $product;
     }
 
     /**
