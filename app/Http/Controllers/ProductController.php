@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductFilterRequest;
 use App\Http\Requests\ProductRequest;
 use App\Product;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -50,7 +51,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        return Product::create(request()->all());
+        return Auth::guard('api')->user()->products()->create(request()->all());
     }
 
     /**
