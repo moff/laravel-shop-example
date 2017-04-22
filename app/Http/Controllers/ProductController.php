@@ -51,7 +51,10 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        return Auth::guard('api')->user()->products()->create(request()->all());
+        $product = new Product($request->all());
+        $this->handlePhoto($request, $product);
+
+        return Auth::guard('api')->user()->products()->save($product);
     }
 
     /**
@@ -87,8 +90,23 @@ class ProductController extends Controller
     {
         $this->authorize('update', $product);
 
-        $product->update(request()->all());
+        $this->handlePhoto($request, $product);
+        $product->update($request->input());
+
         return $product;
+    }
+
+    /**
+     * Handles photo upload and setting photo field to product model
+     *
+     * @param ProductRequest $request
+     * @param Product $product
+     */
+    private function handlePhoto(ProductRequest $request, Product $product) {
+        if ($request->file('photo')) {
+            $path = $request->file('photo')->store('photos');
+            if ($path) $product->photo = $path;
+        }
     }
 
     /**
